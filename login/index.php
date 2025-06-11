@@ -2,33 +2,30 @@
 session_start();
 include '../koneksi.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM admin WHERE username = ?";
-    $stmt = $koneksi->prepare($sql);
+    $stmt = $koneksi->prepare("SELECT * FROM admin WHERE username = ?");
     $stmt->bind_param('s', $username);
     $stmt->execute();
     $result = $stmt->get_result();
+    $admin = $result->fetch_assoc();
 
-    if ($result->num_rows > 0) {
-        $admin = $result->fetch_assoc();
+    if ($admin && password_verify($password, $admin['password'])) {
+        if ($admin['role'] === 'admin') {
+			session_start();
+			$_SESSION['username'] = $admin['username'];
+			$_SESSION['role'] = $admin['role'];
+			$_SESSION['nama'] = $admin['nama'];
+			header('Location: ../admin/dashboard.php');
+			exit();
 
-        if ($password === $admin['password']) {
-            $_SESSION['username'] = $admin['username'];
-            $_SESSION['role'] = $admin['role'];
-            $_SESSION['nama'] = $admin['nama'];
-
-            header('Location: ../admin/dashboard.php');
-            exit;
         } else {
-            echo "<script>alert('Password salah!'); window.location='index.php';</script>";
-            exit;
+            echo "<script>alert('Bukan admin.'); window.location='index.php';</script>";
         }
     } else {
-        echo "<script>alert('Username tidak ditemukan!'); window.location='index.php';</script>";
-        exit;
+        echo "<script>alert('Login gagal.'); window.location='index.php';</script>";
     }
 }
 ?>

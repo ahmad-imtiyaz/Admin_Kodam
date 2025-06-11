@@ -1,13 +1,13 @@
 <?php
-session_start();
-if (!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
-    header('Location: ../login/index.php');
-    exit;
-}
 
-// Cek apakah rolenya Admin
-if ($_SESSION['role'] !== 'Admin') {
-    die("Akses ditolak. Role Anda: " . $_SESSION['role']);
+require_once 'auth_admin.php';
+
+include 'auth_admin.php'; 
+
+// Cek apakah user sudah login dan role-nya admin
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+    echo "<script>alert('Akses ditolak. Anda harus login sebagai admin.'); window.location='../login/index.php';</script>";
+    exit;
 }
 ?>
 
