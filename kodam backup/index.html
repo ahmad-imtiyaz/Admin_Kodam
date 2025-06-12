@@ -160,42 +160,50 @@
 
 
     <!-- Pejabat Start -->
-    <?php
-include 'koneksi.php'; // koneksi ke DB
-
-$query = "SELECT * FROM pejabat"; // nama tabel
-$result = $koneksi->query($query);
-
-while ($row = $result->fetch_assoc()) {
-    echo '
-    <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-        <div class="team-item rounded overflow-hidden" style="background-color: var(--primary);">
-            <div class="team-img position-relative overflow-hidden">
-                <img class="img-fluid w-100" src="' . $row['foto_url'] . '" alt="">
-                <div class="team-social">';
-    if (!empty($row['twitter_link'])) {
-        echo '<a class="btn btn-lg btn-green btn-lg-square rounded" href="' . $row['twitter_link'] . '"><i class="fab fa-twitter fw-normal"></i></a>';
-    }
-    if (!empty($row['facebook_link'])) {
-        echo '<a class="btn btn-lg btn-green btn-lg-square rounded" href="' . $row['facebook_link'] . '"><i class="fab fa-facebook-f fw-normal"></i></a>';
-    }
-    if (!empty($row['instagram_link'])) {
-        echo '<a class="btn btn-lg btn-green btn-lg-square rounded" href="' . $row['instagram_link'] . '"><i class="fab fa-instagram fw-normal"></i></a>';
-    }
-    if (!empty($row['linkedin_link'])) {
-        echo '<a class="btn btn-lg btn-green btn-lg-square rounded" href="' . $row['linkedin_link'] . '"><i class="fab fa-linkedin-in fw-normal"></i></a>';
-    }
-
-    echo '</div>
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-army text-uppercase">Pejabat</h5>
+                <h1 class="mb-0">Kadisinfolahtad dan Kainfolahtadam IV/Diponegoro</h1>
             </div>
-            <div class="text-center py-4">
-                <h6 class="text-primary text-white"><b>' . $row['nama'] . '</b></h6>
-                <p class="text-uppercase m-0 text-white">' . $row['jabatan'] . '</p>
+            <div class="row g-5 justify-content-center">
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+                <div class="team-item rounded overflow-hidden" style="background-color: var(--primary);">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="img/kadisinfo.jpg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-lg btn-green btn-lg-square rounded" href=""><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-lg btn-green btn-lg-square rounded" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-lg btn-green btn-lg-square rounded" href=""><i class="fab fa-instagram fw-normal"></i></a>
+                                <a class="btn btn-lg btn-green btn-lg-square rounded" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h6 class="text-primary text-white"><b>Brigjen TNI Nugroho Septijantono</b></h6>
+                            <p class="text-uppercase m-0 text-white">Kadisinfolahtad IV/Diponegoro</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+                    <div class="team-item rounded overflow-hidden" style="background-color: var(--primary);">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="img/kainfo.jpg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-lg btn-green btn-lg-square rounded" href=""><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-lg btn-green btn-lg-square rounded" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-lg btn-green btn-lg-square rounded" href=""><i class="fab fa-instagram fw-normal"></i></a>
+                                <a class="btn btn-lg btn-green btn-lg-square rounded" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h6 class="text-primary text-white font-bold"><b>Kolonel Inf Prasetyo Djoko T.S., M.Si(Han)</b></h6>
+                            <p class="text-uppercase m-0 text-white">Kainfolahtadam IV/Diponegoro</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>';
-}
-?>
+    </div>
     <!-- Pejabat End -->
 
 
