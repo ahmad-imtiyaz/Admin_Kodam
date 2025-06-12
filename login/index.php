@@ -3,55 +3,57 @@ session_start();
 include '../koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+	$username = $_POST['username'];
+	$password = $_POST['password'];
 
-    $stmt = $koneksi->prepare("SELECT * FROM admin WHERE username = ?");
-    $stmt->bind_param('s', $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $admin = $result->fetch_assoc();
+	$stmt = $koneksi->prepare("SELECT * FROM admin WHERE username = ?");
+	$stmt->bind_param('s', $username);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$admin = $result->fetch_assoc();
 
-    if ($admin && password_verify($password, $admin['password'])) {
-        if ($admin['role'] === 'admin') {
+	if ($admin && password_verify($password, $admin['password'])) {
+		if ($admin['role'] === 'admin') {
 			session_start();
 			$_SESSION['username'] = $admin['username'];
-			$_SESSION['role'] = $admin['role'];
+			$_SESSION['role'] = $admin['role']; // pastikan 'admin'
 			$_SESSION['nama'] = $admin['nama'];
+
 			header('Location: ../admin/dashboard.php');
 			exit();
-
-        } else {
-            echo "<script>alert('Bukan admin.'); window.location='index.php';</script>";
-        }
-    } else {
-        echo "<script>alert('Login gagal.'); window.location='index.php';</script>";
-    }
+		} else {
+			echo "<script>alert('Bukan admin.'); window.location='index.php';</script>";
+		}
+	} else {
+		echo "<script>alert('Login gagal.'); window.location='index.php';</script>";
+	}
 }
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>You Login Template</title>
 	<!-- Site favicon -->
 	<link rel="shortcut icon" href="images/favicon.ico">
 	<!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700" rel="stylesheet">
-    <!-- Icon Font -->
-    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700" rel="stylesheet">
+	<!-- Icon Font -->
+	<link rel="stylesheet" href="fonts/ionicons/css/ionicons.css">
 	<!-- Text Font -->
-    <link rel="stylesheet" href="fonts/font.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <!-- Normal style CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Normal media CSS -->
-    <link rel="stylesheet" href="css/media.css">
+	<link rel="stylesheet" href="fonts/font.css">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Normal style CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Normal media CSS -->
+	<link rel="stylesheet" href="css/media.css">
 </head>
+
 <body>
 	<!-- Header end -->
 	<main class="cd-main">
@@ -67,18 +69,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 										<div class="align-self-center width-100-percentage">
 											<h2>Login</h2>
 											<form action="index.php" method="POST">
-    <div class="form-group">
-        <label class="label">Username</label>
-        <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
-    </div>
-    <div class="form-group">
-        <label class="label">Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
-    </div>
-    <div class="form-group">
-        <input type="submit" class="submit" value="Login">
-    </div>
-</form>
+												<div class="form-group">
+													<label class="label">Username</label>
+													<input type="text" name="username" class="form-control" placeholder="Enter your username" required>
+												</div>
+												<div class="form-group">
+													<label class="label">Password</label>
+													<input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+												</div>
+												<div class="form-group">
+													<input type="submit" class="submit" value="Login">
+												</div>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -86,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 									<div class="padding-40px">
 										<h4>Don't have an account?</h4>
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua.</p>
+											tempor incididunt ut labore et dolore magna aliqua.</p>
 										<div class="sign-up-txt">
 											<a href="javascript:;" class="sign-up-click">Register Now <i class="ion-arrow-right-c"></i></a>
 										</div>
@@ -182,4 +184,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<script src="js/velocity.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 </body>
+
 </html>
