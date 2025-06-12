@@ -1,14 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
-    header('Location: ../login/index.php');
-    exit;
-}
 
-// Cek apakah rolenya Admin
-if ($_SESSION['role'] !== 'Admin') {
-    die("Akses ditolak. Role Anda: " . $_SESSION['role']);
-}
+
+
+include 'auth_admin.php';
+// M
+
+
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +41,7 @@ if ($_SESSION['role'] !== 'Admin') {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -56,7 +53,7 @@ if ($_SESSION['role'] !== 'Admin') {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -127,7 +124,7 @@ if ($_SESSION['role'] !== 'Admin') {
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="404.php">404 Page</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
@@ -195,6 +192,11 @@ if ($_SESSION['role'] !== 'Admin') {
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <a class="dropdown-item" href="logout.php">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
